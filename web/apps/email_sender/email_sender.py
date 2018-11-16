@@ -1,6 +1,7 @@
 import os
 
 from django.conf import settings
+from django.core import mail
 from mail_templated import send_mail
 
 from apps.notification_user.models import UserConnectionField
@@ -15,7 +16,10 @@ class Sender():
 
         for connection in connections:
             email = connection.value
-            send_mail(template, data, settings.EMAIL_FROM, [email])
+
+            send_mail(template, data, settings.EMAIL_FROM, [email], connection=connection)
+
+
             # djemail.send_email(
             #     to=email,
             #     template_name=template,  # .txt and/or .html

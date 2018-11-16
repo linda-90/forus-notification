@@ -124,15 +124,6 @@ CELERY_TASK_SERIALIZER = 'json'
 # }
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
-EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
-EMAIL_FROM = os.environ.get('EMAIL_FROM', 'no-reply@forus.io')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
-EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'False') == 'True'
-
 
 # i18
 LANGUAGE_CODE = 'nl'
@@ -163,3 +154,19 @@ FCM_DJANGO_SETTINGS = {
          # default: False
         "DELETE_INACTIVE_DEVICES": True,
 }
+
+
+
+
+EMAIL_BACKEND = 'apps.email_sender.smtp.EmailBackend'
+EMAIL_FROM = os.environ.get('EMAIL_FROM', 'no-reply@forus.io'),
+EMAIL_BACKEND_CREDENTATIONAL = [
+    {
+        'EMAIL_HOST': os.environ.get('EMAIL_HOST', ''),
+        'EMAIL_PORT': os.environ.get('EMAIL_PORT', ''),
+        'EMAIL_HOST_USER': os.environ.get('EMAIL_HOST_USER', ''),
+        'EMAIL_HOST_PASSWORD': os.environ.get('EMAIL_HOST_PASSWORD', ''),
+        'EMAIL_USE_TLS': os.environ.get('EMAIL_USE_TLS', 'True') == 'True',
+        'EMAIL_USE_SSL': os.environ.get('EMAIL_USE_SSL', 'False') == 'True',
+    }
+]
